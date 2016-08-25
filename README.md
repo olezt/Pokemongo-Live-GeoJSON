@@ -6,7 +6,7 @@ Just started. Do NOT expect big yet but at least it works... :laughing:
 A bot scans a specific area and retuns a GeoJSON file which is then used to show pokemons on a Google map.
 
 ### Requirements
-Node installation.
+NodeJS installation https://nodejs.org/en/
 
 ### To use - No npm module yet
 
@@ -30,8 +30,8 @@ var ne_coords = {
         };
 ```
 5 Open cmd and run ```node geoJSONcreator.js```</br>
-6 Open index.html with a web browser and go to the area you scan</br>
-7 Wait until pokemons appear -you may need to refresh-</br>
+6 Open index.html with a web browser</br>
+7 Wait until pokemons appear</br>
 
 
 ### Screenshot

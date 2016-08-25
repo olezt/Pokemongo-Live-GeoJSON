@@ -1,25 +1,14 @@
 'use strict';
 
-//var PokemonGO = require('./poke.io.js');
+
+require('./config.js');
 var PokemonGO = require('pokemon-go-node-api');
 var replace = require("replace");
 var fs = require('fs');
 // using var so you can login with multiple users
 var a = new PokemonGO.Pokeio();
 var pokemons=[];
-//Set environment variables or replace placeholder text
-var username = process.env.PGO_USERNAME || 'USER';
-var password = process.env.PGO_PASSWORD || 'PASSWD';
-var provider = process.env.PGO_PROVIDER || 'ptc';
-var direction = "up";
-var sw_coords = {
-            lat: 37.984998, 
-            lon: 23.733532 
-        };
-var ne_coords = {
-            lat: sw_coords.lat+0.01, 
-            lon: sw_coords.lon+0.01
-        };
+
 var location = {
     type: 'coords',
     //name: process.env.PGO_LOCATION || 'imittou 229 athens greece'
@@ -31,8 +20,8 @@ var location = {
 };
 var firstpokemon = true;
 var walkbeat = 0.0005;
-
-
+var provider = process.env.PGO_PROVIDER || 'ptc';
+var direction = "up";
 
 
 a.init(username, password, location, provider, function (err) {

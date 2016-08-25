@@ -14,11 +14,7 @@ Node installation.
 2. npm install pokemon-go-node-api
 3. npm install replace
 4. Edit geoJSONcreator.js file according to your needs.
-5. Open cmd and run node geoJSONcreator.js
-6. Open index.html with a web browser and go to the area you scan
-7. Wait until pokemons appear -you may need to refresh-
-
-```javascript
+```
 //Set environment variables or replace placeholder text
 var username = process.env.PGO_USERNAME || 'USER';
 var password = process.env.PGO_PASSWORD || 'PASSWD';
@@ -31,4 +27,11 @@ var sw_coords = {
 var ne_coords = {
             lat: sw_coords.lat+0.01, 
             lon: sw_coords.lon+0.01
-        };```
+        };
+```
+5. Open cmd and run ```node geoJSONcreator.js```
+6. Open index.html with a web browser and go to the area you scan
+7. Wait until pokemons appear -you may need to refresh-
+
+
+        

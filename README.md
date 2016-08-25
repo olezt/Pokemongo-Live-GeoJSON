@@ -34,4 +34,8 @@ var ne_coords = {
 7 Wait until pokemons appear -you may need to refresh-</br>
 
 
-        
+### Screenshot
+
+<p align="center">
+  <img src="example_screenshot.png" height="450"/>
+</p>

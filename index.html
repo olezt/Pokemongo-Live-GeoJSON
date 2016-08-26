@@ -25,13 +25,24 @@
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: window.sw_coordlat + 0.005, 
 			     lng: window.sw_coordlon + 0.005},  
-                    zoom: 15
+                    zoom: 15,
+		    streetViewControl: false
                 });
+var marker = new google.maps.Marker({
+          position: {lat: window.botlat, lng: window.botlon},
+          map: map,
+          title: 'Searching for pokemon! :D'
+        });
+
                 loadData();
                 //Update geoJSON every 30 sec
                 setInterval(function () {
                     loadData();
-                }, 30000);
+                }, 10000);
+		setInterval(function () {
+			var botpos = new google.maps.LatLng(window.botlat, window.botlon);
+       	 		marker.setPosition(botpos);
+                }, 2000);
             }
 
             //load geoJSON
@@ -68,7 +79,9 @@
                 });
             }
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
-        <script src="coords.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
+<script src="coords.js"></script>
+<script src="botcoords.js"></script>
     </body>
 </html>

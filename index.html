@@ -5,8 +5,7 @@
         <title>Simple Map</title>
         <meta name="viewport" content="initial-scale=1.0">
         <meta charset="utf-8">
-        <script src="config.js"></script>
-
+        
         <style>
             html, body {
                 height: 100%;
@@ -24,7 +23,8 @@
             var map;
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: 37.984998 + 0.005, lng: 23.733532 + 0.005},
+                    center: {lat: window.sw_coordlat + 0.005, 
+			     lng: window.sw_coordlon + 0.005},  
                     zoom: 15
                 });
                 loadData();
@@ -38,14 +38,14 @@
             function loadData() {
                 var now = new Date().getTime();
                 map.data.loadGeoJson('pokemons_rawdata.json');
-                
+                //remove expired pokemon
                 map.data.forEach(function (feature) {
                     if (feature.getProperty("disappear_time") < now) {
                         map.data.remove(feature);
                     }
                     google.maps.event.removeListener(listenerHandle);
                 });
-
+		//set markers' style
                 map.data.setStyle(function (feature) {
                     return {
                         icon: {
@@ -66,10 +66,9 @@
                     infowindow.setOptions({pixelOffset: new google.maps.Size(0, -30)});
                     infowindow.open(map);
                 });
-
             }
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
-        async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+        <script src="coords.js"></script>
     </body>
 </html>

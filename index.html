@@ -47,6 +47,11 @@ var marker = new google.maps.Marker({
 
             //load geoJSON
             function loadData() {
+//remove expired pokemon
+                map.data.forEach(function (feature) {
+                        map.data.remove(feature);
+                    	google.maps.event.removeListener(listenerHandle);
+                });
                 var now = new Date().getTime();
                 map.data.loadGeoJson('pokemons_rawdata.json');
                 //remove expired pokemon

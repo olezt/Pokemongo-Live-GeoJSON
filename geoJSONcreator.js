@@ -1,6 +1,6 @@
 'use strict';
 
-
+var openmap=require("openurl");
 require('./config.js');
 var PokemonGO = require('pokemon-go-node-api');
 var replace = require("replace");
@@ -8,7 +8,7 @@ var fs = require('fs');
 // using var so you can login with multiple users
 var a = new PokemonGO.Pokeio();
 var pokemons=[];
-
+openmap.open("index.html");
 var location = {
     type: 'coords',
     //name: process.env.PGO_LOCATION || 'Acropolis athens greece' //use name or coords

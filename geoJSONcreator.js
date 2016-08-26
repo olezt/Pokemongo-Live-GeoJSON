@@ -11,7 +11,7 @@ var pokemons=[];
 
 var location = {
     type: 'coords',
-    //name: process.env.PGO_LOCATION || 'imittou 229 athens greece'
+    //name: process.env.PGO_LOCATION || 'Acropolis athens greece' //use name or coords
     coords: {
         latitude: sw_coords.lat, 
         longitude: sw_coords.lon,
@@ -47,19 +47,16 @@ a.init(username, password, location, provider, function (err) {
                     console.log(err);
                 }
                 next_move();
-if(hb!=null) {
-search_for_pokemons(hb);
-}
+		if(hb!=null) {
+			search_for_pokemons(hb);
+		}
 
             });
-        //};//
+
+fs.writeFile("botcoords.js","var botlat="+ a.playerInfo.latitude+";\n var botlon="+ a.playerInfo.longitude+";");
         }, 4000);
-        //fs.appendFile("pokemons_rawdata.json", ']}');
 
     });
-    
-    
-    
 });
 
 function search_for_pokemons(hb) {
@@ -92,12 +89,10 @@ function search_for_pokemons(hb) {
                         }
                     }
                 }
-    
 }
 
-
-
 function printJSON(firstpokemon,pokemon) {
+
         console.log('Wild '+ pokemon.pokemon_name + ' appeared');
         var jsonPokemon='{ "type": "Feature","geometry": {"type": "Point", "coordinates": ['+pokemon.longitude+','+pokemon.latitude+']},"properties": '+JSON.stringify(pokemon)+'}]}';
         
@@ -116,9 +111,9 @@ function printJSON(firstpokemon,pokemon) {
     }; 
 
 function next_move() {
+
     switch (direction) {
                     case "up":
-                        //console.log("up "+a.playerInfo.latitude );
                         a.playerInfo.latitude += walkbeat;
                         a.playerInfo.latitude = (a.playerInfo.latitude).toFixed(6);
                         a.playerInfo.latitude = parseFloat(a.playerInfo.latitude);
@@ -136,7 +131,6 @@ function next_move() {
                         }
                         break;
                     case "down":
-                        //console.log("down "+a.playerInfo.latitude );
                         a.playerInfo.latitude -= walkbeat;
                         a.playerInfo.latitude = (a.playerInfo.latitude).toFixed(6);
                         a.playerInfo.latitude = parseFloat(a.playerInfo.latitude);

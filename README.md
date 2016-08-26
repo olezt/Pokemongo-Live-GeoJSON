@@ -11,10 +11,8 @@ NodeJS installation https://nodejs.org/en/
 ### To use - No npm module yet
 
 1 Download project and cd into folder</br>
-2 npm install pokemon-go-node-api</br>
-3 npm install replace</br>
-4 npm install openurl</br>
-5 Edit config.js file according to your needs</br>
+2 npm install pokemon-go-node-api replace openurl</br>
+3 Edit config.js file according to your needs</br>
 ```
 //Set environment variables or replace placeholder text
 var username = process.env.PGO_USERNAME || 'USER';
@@ -30,9 +28,10 @@ var ne_coords = {
             lon: sw_coords.lon+0.01
         };
 ```
-6 Open cmd and run ```node geoJSONcreator.js```, the map will open</br>
-7 Wait until pokemons appear :punch:</br>
+4 Open cmd and run ```node geoJSONcreator.js```, the map will open</br>
+5 Wait until pokemons appear :punch:</br>
 
+Note: Keep an eye on cmd for errors while login and list of wild pokemons that appeared.
 
 ### Screenshot
 

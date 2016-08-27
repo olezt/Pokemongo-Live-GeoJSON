@@ -8,30 +8,41 @@ var fs = require('fs');
 // using var so you can login with multiple users
 var a = new PokemonGO.Pokeio();
 var pokemons=[];
-openmap.open("index.html");
-var location = {
-    type: 'coords',
-    //name: process.env.PGO_LOCATION || 'Acropolis athens greece' //use name or coords
-    coords: {
-        latitude: sw_coords.lat, 
-        longitude: sw_coords.lon,
-        altitude: 0
-    }
-};
+if(name==null){
+    var location = {
+        type: 'coords',
+        coords: {
+            latitude: sw_coords.lat, 
+            longitude: sw_coords.lon,
+            altitude: 0
+        }
+    };
+}else{
+    var location = {
+        type: 'name',
+        name: process.env.PGO_LOCATION || name //use name or coords
+    }; 
+}
+
 var firstpokemon = true;
 var walkbeat = 0.0005;
 var provider = process.env.PGO_PROVIDER || 'ptc';
 var direction = "up";
 
-
 a.init(username, password, location, provider, function (err) {
     if (err)
         throw err;
-        fs.writeFile("pokemons_rawdata.json", '{ "type": "FeatureCollection","features": [');
+    fs.writeFile("pokemons_rawdata.json", '{ "type": "FeatureCollection","features": [');
     console.log('[i] Current location: ' + a.playerInfo.locationName);
     console.log('[i] lat/long/alt: : ' + a.playerInfo.latitude + ' ' + a.playerInfo.longitude + ' ' + a.playerInfo.altitude);
-
-
+    //in case user set name by cli
+    sw_coords.lat=a.playerInfo.latitude ;
+    sw_coords.lon=a.playerInfo.longitude;
+    //Create javascript file that is imported in index.html
+    fs.writeFile("coords.js","var sw_coordlat="+ sw_coords.lat+";\n");
+    fs.appendFile("coords.js","var sw_coordlon="+ sw_coords.lon+";\n");
+    fs.appendFile("coords.js","var distanceTo="+ distanceTo+";");
+    openmap.open("index.html");
 
     a.GetProfile(function (err, profile) {
         

@@ -53,7 +53,6 @@ a.init(username, password, location, provider, function (err) {
 
             });
 
-fs.writeFile("botcoords.js","var botlat="+ a.playerInfo.latitude+";\n var botlon="+ a.playerInfo.longitude+";");
         }, 4000);
 
     });

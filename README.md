@@ -3,12 +3,13 @@
 Just started. Do NOT expect big yet but at least it works... :laughing:
 
 ### Description
-A bot scans a specific area and retuns a GeoJSON file which is then used to show pokemons on a Google map.
+Server-side (NodeJS): A bot scans a specific area and retuns a GeoJSON file full of pokemon<br>
+Client-side: An HTML page previews the found pokemons on a Google map.
 
 ### Requirements
 NodeJS installation https://nodejs.org/en/
 
-### To use - No npm module yet
+### How to use
 
 1. Download project and cd into folder</br>
 2. npm install pokemon-go-node-api replace openurl</br>
@@ -34,3 +35,4 @@ sw_coords = {
 <p align="center">
   <img src="example_screenshot.png" height="450"/>
 </p>
+Based on https://github.com/Armax/Pokemon-GO-node-api

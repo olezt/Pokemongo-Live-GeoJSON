@@ -110,9 +110,15 @@ function printJSON(firstpokemon,pokemon) {
         return false;
     }; 
 
-function next_move() {
+function printBotJSON() {
+        var jsonBot='{ "type": "FeatureCollection","features": [{ "type": "Feature","geometry": {"type": "Point", "coordinates": ['+a.playerInfo.longitude+','+a.playerInfo.latitude+']},"properties": {"name": "Searching Pokemooorons"}}]}';
+        fs.writeFile("bot_rawdata.json", jsonBot);
+    };
 
-    switch (direction) {
+
+function next_move() {
+	printBotJSON();
+    	switch (direction) {
                     case "up":
                         a.playerInfo.latitude += walkbeat;
                         a.playerInfo.latitude = (a.playerInfo.latitude).toFixed(6);

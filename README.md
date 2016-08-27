@@ -13,9 +13,9 @@ NodeJS installation https://nodejs.org/en/
 1. Download project and cd into folder</br>
 2. npm install pokemon-go-node-api replace openurl</br>
 3. Edit config.js file according to your needs</br>
-4. Open cmd
-4.1 Execute ```node geoJSONcreator.js```, the map will open</br>
-4.2 Or for example: ```node geoJSONcreator.js Times square new york```
+4. Open cmd</br>
+4.1 Execute: ```node geoJSONcreator.js```, the map will open</br>
+4.2 Or set location as: ```node geoJSONcreator.js Times square new york```</br>
 5. Wait until pokemons appear :punch:</br>
 ```
 //Set environment variables or replace placeholder text

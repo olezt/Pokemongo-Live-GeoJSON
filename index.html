@@ -23,31 +23,51 @@
             var map;
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: window.sw_coordlat + 0.005, 
-			     lng: window.sw_coordlon + 0.005},  
+                    center: {lat: window.sw_coordlat + window.distanceTo/2, 
+			     lng: window.sw_coordlon + window.distanceTo/2},  
                     zoom: 15,
 		    streetViewControl: false
                 });
-var marker = new google.maps.Marker({
-          position: {lat: window.botlat, lng: window.botlon},
-          map: map,
-          title: 'Searching for pokemon! :D'
-        });
-
+                var marker = new google.maps.Marker({
+                    map: map,
+                    title: 'Searching for pokemon! :D'
+                });
+                marker=loadBotData(marker);
                 loadData();
-                //Update geoJSON every 30 sec
+                new google.maps.Rectangle({
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillOpacity: 0,
+                    map: map,
+                    bounds: {
+                        north: window.sw_coordlat+window.distanceTo,
+                        south: window.sw_coordlat,
+                        east: window.sw_coordlon+window.distanceTo,
+                        west: window.sw_coordlon
+                    }
+                });
+                
+                //Update pokemons every 10 sec
                 setInterval(function () {
                     loadData();
                 }, 10000);
-		setInterval(function () {
-			var botpos = new google.maps.LatLng(window.botlat, window.botlon);
-       	 		marker.setPosition(botpos);
+                //Update bot location every 2 sec
+                setInterval(function () {
+                    marker=loadBotData(marker);
                 }, 2000);
+            }
+
+            function loadBotData(marker) {
+                $.getJSON( "bot_rawdata.json", function(data) {
+                    marker.setPosition({lat: data.features[0].geometry.coordinates[1], lng: data.features[0].geometry.coordinates[0]});
+                });
+                return marker;
             }
 
             //load geoJSON
             function loadData() {
-//remove expired pokemon
+                //remove ALL pokemon
                 map.data.forEach(function (feature) {
                         map.data.remove(feature);
                     	google.maps.event.removeListener(listenerHandle);
@@ -84,9 +104,9 @@ var marker = new google.maps.Marker({
                 });
             }
         </script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
         async defer></script>
 <script src="coords.js"></script>
-<script src="botcoords.js"></script>
     </body>
 </html>

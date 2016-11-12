@@ -1,7 +1,5 @@
 # Pokemongo-Live-GeoJSON
 
-Just started. Do NOT expect big yet but at least it works... :laughing:
-
 ### Description
 Server-side (NodeJS): A bot scans a specific area and retuns a GeoJSON file full of pokemon<br>
 Client-side: An HTML page previews the found pokemons on a Google map.

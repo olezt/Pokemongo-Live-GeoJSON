@@ -5,30 +5,20 @@ require('./config.js');
 var PokemonGO = require('pokemon-go-node-api');
 var replace = require("replace");
 var fs = require('fs');
+
 // using var so you can login with multiple users
 var a = new PokemonGO.Pokeio();
-var pokemons=[];
-if(name==null){
-    var location = {
-        type: 'coords',
-        coords: {
-            latitude: sw_coords.lat, 
-            longitude: sw_coords.lon,
-            altitude: 0
-        }
-    };
-}else{
-    var location = {
-        type: 'name',
-        name: process.env.PGO_LOCATION || name //use name or coords
-    }; 
-}
+var location = initLatLng();
 
+var pokemons=[];
 var firstpokemon = true;
 var walkbeat = 0.0005;
 var provider = process.env.PGO_PROVIDER || 'ptc';
 var direction = "up";
 
+/**
+ * Initialise user and start search interval
+ */
 a.init(username, password, location, provider, function (err) {
     if (err)
         throw err;
@@ -57,9 +47,9 @@ a.init(username, password, location, provider, function (err) {
                 if (err) {
                     console.log(err);
                 }
-                next_move();
+                nextMove();
 		if(hb!=null) {
-			search_for_pokemons(hb);
+			searchForPokemons(hb);
 		}
 
             });
@@ -69,8 +59,33 @@ a.init(username, password, location, provider, function (err) {
     });
 });
 
-function search_for_pokemons(hb) {
-    
+/**
+ * Initialise lat lng to start
+ */
+function initLatLng(){
+	var location = {};
+	if(name==null){
+	    location = {
+		type: 'coords',
+		coords: {
+		    latitude: sw_coords.lat, 
+		    longitude: sw_coords.lon,
+		    altitude: 0
+		}
+	    };
+	}else{
+	    location = {
+		type: 'name',
+		name: process.env.PGO_LOCATION || name //use name or coords
+	    }; 
+	}
+	return location;
+}
+
+/**
+ * Search for pokemons
+ */
+function searchForPokemons(hb) {
     var i,
     current_pokemon_proto,
     current_pokemon_data={},
@@ -101,6 +116,9 @@ function search_for_pokemons(hb) {
                 }
 }
 
+/**
+ * Append to file the json object
+ */
 function printJSON(firstpokemon,pokemon) {
 
         console.log('Wild '+ pokemon.pokemon_name + ' appeared');
@@ -125,8 +143,10 @@ function printBotJSON() {
         fs.writeFile("bot_rawdata.json", jsonBot);
     };
 
-
-function next_move() {
+/**
+ * Make the next move on searching
+ */
+function nextMove() {
 	printBotJSON();
     	switch (direction) {
                     case "up":
